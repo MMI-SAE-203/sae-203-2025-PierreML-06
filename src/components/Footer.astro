@@ -6,56 +6,75 @@ import IconTwitter from "../assets/icons/X.svg";
 import IconYoutube from "../assets/icons/youtube.svg";
 ---
 
-<footer
-    class="grille space-y-6 text-sm bg-stone-900 py-16 px-6 text-white lg:space-y-0"
->
-    <a class="block" href="/" aria-label="Accueil">
-        <LogoFooter />
-    </a>
+<footer class="bg-black text-white py-12 px-6">
+    <div
+        class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left"
+    >
+        <!-- Logo et description -->
+        <div>
+            <a href="/" aria-label="Accueil">
+                <LogoFooter class="h-12 mx-auto md:mx-0" />
+            </a>
+            <p class="mt-4 text-gray-400">
+                Ciné Échos - Le festival du cinéma nocturne à Belfort.
+            </p>
+        </div>
 
-    <nav class="space-y-3 lg:col-span-3 lg:col-start-7">
-        <h3 class="uppercase text-sm tracking-wide text-stone-400">Menu</h3>
-        <ul>
-            <li><a href="/agenda">Agenda</a></li>
-            <li><a href="/contact">Contact et accès</a></li>
-        </ul>
-    </nav>
+        <!-- Navigation -->
+        <nav>
+            <h3 class="text-lg font-bold uppercase mb-4">Navigation</h3>
+            <ul class="space-y-2">
+                <li>
+                    <a href="/festival" class="hover:text-gray-400">À propos</a>
+                </li>
+                <li><a href="/films" class="hover:text-gray-400">Films</a></li>
+                <li>
+                    <a href="/activites" class="hover:text-gray-400"
+                        >Activités</a>
+                </li>
+                <li>
+                    <a href="/invites" class="hover:text-gray-400">Invités</a>
+                </li>
+                <li>
+                    <a href="/infos-pratiques" class="hover:text-gray-400"
+                        >Infos Pratiques</a>
+                </li>
+                <li>
+                    <a href="/contact" class="hover:text-gray-400">Contact</a>
+                </li>
+            </ul>
+        </nav>
 
-    <div class="space-y-3 lg:col-span-3 lg:col-start-10">
-        <h3 class="uppercase text-sm tracking-wide text-stone-400">Contact</h3>
-        <address class="not-italic">
-            1 rue Paul Koepfler<br />90000 Belfort<br />
-            <a href="tel:0384542727">03 84 54 27 27</a><br />
-            <a href="mailto:conservatoire@agglo-belfort.fr"
-                >conservatoire@agglo-belfort.fr</a
-            >
-        </address>
+        <!-- Réseaux sociaux -->
+        <div>
+            <h3 class="text-lg font-bold uppercase mb-4">Suivez-nous</h3>
+            <div class="flex justify-center md:justify-start gap-4">
+                <a href="https://facebook.com" aria-label="Facebook">
+                    <IconFacebook
+                        class="h-8 w-8 fill-white hover:fill-gray-400"
+                    />
+                </a>
+                <a href="https://instagram.com" aria-label="Instagram">
+                    <IconInstagram
+                        class="h-8 w-8 fill-white hover:fill-gray-400"
+                    />
+                </a>
+                <a href="https://twitter.com" aria-label="Twitter">
+                    <IconTwitter
+                        class="h-8 w-8 fill-white hover:fill-gray-400"
+                    />
+                </a>
+                <a href="https://youtube.com" aria-label="YouTube">
+                    <IconYoutube
+                        class="h-8 w-8 fill-white hover:fill-gray-400"
+                    />
+                </a>
+            </div>
+        </div>
     </div>
-    <div class="space-y-3 lg:col-span-3 lg:col-start-10">
-        <h3 class="uppercase text-sm tracking-wide text-stone-400">
-            Nous suivre
-        </h3>
-        <ul class="flex gap-4">
-            <li>
-                <a href="https://facebook.com" aria-label="facebook">
-                    <IconFacebook class="fill-white" />
-                </a>
-            </li>
-            <li>
-                <a href="https://instagram.com" aria-label="instagram">
-                    <IconInstagram class="fill-white" />
-                </a>
-            </li>
-            <li>
-                <a href="https://twitter.com" aria-label="twitter">
-                    <IconTwitter class="fill-white" />
-                </a>
-            </li>
-            <li>
-                <a href="https://youtube.com" aria-label="youtube">
-                    <IconYoutube class="fill-white" />
-                </a>
-            </li>
-        </ul>
+
+    <!-- Copyright -->
+    <div class="mt-8 text-center text-gray-500 text-sm">
+        © {new Date().getFullYear()} Ciné Échos. Tous droits réservés.
     </div>
 </footer>

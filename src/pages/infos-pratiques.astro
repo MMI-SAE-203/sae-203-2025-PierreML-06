@@ -1,0 +1,162 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Infos Pratiques">
+    <section class="pt-32 pb-16 bg-black text-white text-center">
+        <h1 class="text-5xl font-bold mb-6">Infos Pratiques</h1>
+        <p class="text-lg max-w-4xl mx-auto">
+            Toutes les informations essentielles pour préparer votre venue et
+            vivre pleinement l'expérience du festival.
+        </p>
+    </section>
+
+    <!-- Tarifs -->
+    <section class="py-16 bg-gray-900 text-white text-center">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">Tarifs</h2>
+            <p class="text-lg">
+                Voici les différentes options de billets pour accéder aux
+                projections et événements du festival.
+            </p>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Pass 1 jour</h3>
+                    <p class="mt-2 text-lg">10€</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Pass 3 jours</h3>
+                    <p class="mt-2 text-lg">25€</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Pass 4 jours</h3>
+                    <p class="mt-2 text-lg">30€</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Tarif réduit</h3>
+                    <p class="mt-2 text-lg">
+                        7€ (étudiants, demandeurs d’emploi, -18 ans)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lieux -->
+    <section class="py-16 bg-gray-800 text-white text-center">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">Lieux</h2>
+            <p class="text-lg">
+                Les projections et événements se dérouleront dans plusieurs
+                lieux emblématiques de Belfort.
+            </p>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Cinéma Pathé</h3>
+                    <p class="mt-2 text-lg">3 Rue du 21 Novembre</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Théâtre Granit</h3>
+                    <p class="mt-2 text-lg">1 Faubourg de Montbéliard</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Projection plein air</h3>
+                    <p class="mt-2 text-lg">Parc de la Douce</p>
+                </div>
+            </div>
+            <div class="mt-10">
+                <img
+                    src="/assets/images/map-placeholder.jpg"
+                    alt="Carte des lieux"
+                    class="w-full rounded-lg shadow-md"
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- Hébergement -->
+    <section class="py-16 bg-gray-900 text-white text-center">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">Hébergement</h2>
+            <p class="text-lg">
+                Découvrez des solutions d’hébergement adaptées à tous les
+                budgets à proximité du festival.
+            </p>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Hôtel Best Western</h3>
+                    <p class="mt-2 text-lg">Centre-ville de Belfort</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Ibis Budget</h3>
+                    <p class="mt-2 text-lg">Proche de la gare</p>
+                </div>
+                <div class="bg-gray-800 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Camping Municipal</h3>
+                    <p class="mt-2 text-lg">À 10 min du centre</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transport -->
+    <section class="py-16 bg-gray-800 text-white text-center">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">Transport</h2>
+            <p class="text-lg">
+                Tous les moyens pour vous rendre facilement au festival.
+            </p>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Train</h3>
+                    <p class="mt-2 text-lg">
+                        Gare de Belfort accessible en TGV et TER.
+                    </p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Voiture</h3>
+                    <p class="mt-2 text-lg">Parking gratuit au centre-ville.</p>
+                </div>
+                <div class="bg-gray-700 p-6 rounded-lg">
+                    <h3 class="text-2xl font-semibold">Covoiturage</h3>
+                    <p class="mt-2 text-lg">
+                        Plateforme de partage pour organiser un trajet.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 bg-gray-900 text-white text-center">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">FAQ</h2>
+            <div class="space-y-4">
+                <details class="p-4 bg-gray-800 rounded-lg cursor-pointer">
+                    <summary class="font-semibold text-lg"
+                        >Quels sont les horaires des projections ?</summary
+                    >
+                    <p class="mt-2 text-gray-300">
+                        Les projections ont lieu de 18h à minuit.
+                    </p>
+                </details>
+                <details class="p-4 bg-gray-800 rounded-lg cursor-pointer">
+                    <summary class="font-semibold text-lg"
+                        >Les films sont-ils en VO ou VF ?</summary
+                    >
+                    <p class="mt-2 text-gray-300">
+                        Tous les films sont projetés en VOSTFR.
+                    </p>
+                </details>
+                <details class="p-4 bg-gray-800 rounded-lg cursor-pointer">
+                    <summary class="font-semibold text-lg"
+                        >Comment réserver mes billets ?</summary
+                    >
+                    <p class="mt-2 text-gray-300">
+                        Billets disponibles en ligne et sur place.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </section>
+</Layout>

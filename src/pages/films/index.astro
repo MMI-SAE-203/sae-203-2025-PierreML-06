@@ -1,0 +1,66 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getAllFilmsSorted } from "../../../backend/backend.mjs";
+import ImgPb from "../../components/ImgPb.astro";
+
+let films = [];
+
+try {
+    films = await getAllFilmsSorted({
+        requestKey: null, // Désactive l'annulation automatique
+        fetchParams: { cache: "no-store" }, // Empêche la mise en cache des requêtes
+    });
+} catch (error) {
+    console.error("Erreur lors du chargement des films :", error);
+}
+---
+
+<Layout title="Programme Films">
+    <section class="pt-32 pb-16 bg-black text-white text-center">
+        <h1 class="text-5xl font-bold mb-6">Programme Films</h1>
+        <p class="text-lg max-w-4xl mx-auto">
+            Découvrez les films projetés lors du festival et explorez leurs
+            histoires uniques.
+        </p>
+    </section>
+
+    <!-- Liste des films -->
+    <section class="py-16 bg-gray-900 text-white text-center">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            {
+                films.length > 0 ? (
+                    films.map((film) => (
+                        <div
+                            key={film.id}
+                            class="p-6 bg-gray-800 rounded-lg hover:scale-105 transition"
+                        >
+                            <ImgPb
+                                record={film}
+                                field="affiche"
+                                alt={film.imgAlt}
+                                classPicture="duotone col-start-1 row-start-1 col-span-2 row-span-2 group-hover:before:bg-black"
+                                classImg="group-hover:grayscale-0 group-hover:mix-blend-normal"
+                            />
+                            <h3 class="text-2xl font-semibold mt-4">
+                                {film.titre}
+                            </h3>
+                            <p class="text-sm text-gray-400 mt-2">
+                                {film.synopsis}
+                            </p>
+                            <a
+                                href={`/films/${film.id}`}
+                                class="mt-4 inline-block bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600"
+                            >
+                                Voir le film
+                            </a>
+                        </div>
+                    ))
+                ) : (
+                    <p class="text-gray-400 text-lg">
+                        Aucun film disponible pour le moment.
+                    </p>
+                )
+            }
+        </div>
+    </section>
+</Layout>

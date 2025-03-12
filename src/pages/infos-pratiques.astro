@@ -1,5 +1,8 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Picture } from "astro:assets";
+
+import MapImage from "../assets/images/map.webp";
 ---
 
 <Layout title="Infos Pratiques">
@@ -64,11 +67,11 @@ import Layout from "../layouts/Layout.astro";
                     <p class="mt-2 text-lg">Parc de la Douce</p>
                 </div>
             </div>
-            <div class="mt-10">
-                <img
-                    src="/assets/images/map-placeholder.jpg"
+            <div class="mt-10 flex justify-center">
+                <Picture
+                    src={MapImage}
+                    class="max-w-lg w-full rounded-lg shadow-md"
                     alt="Carte des lieux"
-                    class="w-full rounded-lg shadow-md"
                 />
             </div>
         </div>

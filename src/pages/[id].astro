@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { getFilmById, getAllFilmsSorted } from "../../backend/backend.mjs";
+
+export async function getStaticPaths() {
+    const films = await getAllFilmsSorted();
+    return films.map((film) => ({
+        params: { id: film.id },
+    }));
+}
+
+const { params } = Astro.props;
+const film = await getFilmById(params.id);
+---
+
+<Layout title={film ? film.titre : "Chargement..."}>
+    {
+        film ? (
+            <section class="pt-32 pb-16 bg-black text-white text-center">
+                <h1 class="text-5xl font-bold mb-6">{film.titre}</h1>
+                <div class="max-w-4xl mx-auto">
+                    <img
+                        src={film.affiche}
+                        alt={film.titre}
+                        class="w-full max-w-lg mx-auto rounded-lg shadow-lg"
+                    />
+                    <p class="text-lg mt-6">{film.synopsis}</p>
+
+                    {film.bande_annonce && (
+                        <div class="mt-6">
+                            <iframe
+                                class="w-full max-w-lg mx-auto rounded-lg"
+                                width="560"
+                                height="315"
+                                src={film.bande_annonce}
+                                title="Bande-annonce"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen
+                            />
+                        </div>
+                    )}
+
+                    <div class="mt-8 text-lg bg-gray-900 p-6 rounded-lg">
+                        <p>
+                            <strong>Durée :</strong> {film.duree} minutes
+                        </p>
+                        <p>
+                            <strong>Langue :</strong> {film.langue}
+                        </p>
+                        <p>
+                            <strong>Production :</strong> {film.production}
+                        </p>
+                    </div>
+
+                    {film.invite && (
+                        <div class="mt-8 bg-gray-800 p-6 rounded-lg">
+                            <h3 class="text-2xl font-semibold">
+                                Invité associé
+                            </h3>
+                            <p class="mt-2 text-lg">{film.invite.nom}</p>
+                        </div>
+                    )}
+                </div>
+            </section>
+        ) : (
+            <section class="pt-32 pb-16 text-white text-center">
+                <p>Chargement du film...</p>
+            </section>
+        )
+    }
+</Layout>

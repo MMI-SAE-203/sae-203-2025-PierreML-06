@@ -1,0 +1,48 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getGuestById, getActivitiesByGuestId } from "../../../backend/backend.mjs";
+
+const { id } = Astro.params;
+const guest = await getGuestById(id);
+const activities = await getActivitiesByGuestId(id);
+---
+
+<Layout title={guest.nom}>
+    <section class="pt-32 pb-16 bg-black text-white text-center">
+        <h1 class="text-5xl font-bold mb-6">{guest.nom}</h1>
+        <p class="text-lg max-w-4xl mx-auto">{guest.role}</p>
+    </section>
+
+    <section class="py-16 bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
+            <img
+                src={guest.photo}
+                alt={`Photo de ${guest.nom}`}
+                class="w-full h-auto rounded-lg shadow-md"
+            />
+            <div>
+                <h2 class="text-3xl font-bold mb-4">Biographie</h2>
+                <p class="text-lg">{guest.biographie}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-gray-800 text-white">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold mb-6">Films et Activités</h2>
+            {
+                activities.length > 0 ? (
+                    <ul class="space-y-4">
+                        {activities.map((activity) => (
+                            <li class="bg-gray-700 p-4 rounded-lg">
+                                {activity.nom}
+                            </li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p class="text-gray-400">Aucune activité associée.</p>
+                )
+            }
+        </div>
+    </section>
+</Layout>

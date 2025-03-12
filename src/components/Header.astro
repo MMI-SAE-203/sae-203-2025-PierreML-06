@@ -73,15 +73,15 @@ import Logo from "../assets/icons/logo.svg";
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
-        const toggle = document.querySelector("#menu-btn");
-        const nav = document.querySelector("#menu");
-        const header = document.querySelector("#header");
+        const menuBtn = document.getElementById("menu-btn");
+        const menu = document.getElementById("menu");
+        const header = document.getElementById("header");
 
-        toggle.addEventListener("click", () => {
-            const isOpen = nav.classList.contains("hidden");
-            toggle.setAttribute("aria-expanded", String(isOpen));
-            nav.classList.toggle("hidden", !isOpen);
-            nav.classList.toggle("flex", isOpen);
+        menuBtn.addEventListener("click", () => {
+            const isOpen = menu.classList.contains("hidden");
+            menuBtn.setAttribute("aria-expanded", isOpen);
+            menu.classList.toggle("hidden", !isOpen);
+            menu.classList.toggle("flex", isOpen);
         });
 
         window.addEventListener("scroll", () => {

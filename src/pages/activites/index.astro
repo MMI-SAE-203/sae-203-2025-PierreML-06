@@ -1,0 +1,52 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import { getAllActivitiesSorted } from "../../../backend/backend.mjs";
+
+const activities = await getAllActivitiesSorted();
+
+console.log("Activités chargées :", activities); // Debugging
+---
+
+<Layout title="Programme des Activités">
+    <section class="py-16 bg-gray-900 text-white text-center">
+        <h1 class="text-5xl font-bold mb-6">Programme des Activités</h1>
+        <p class="text-lg max-w-4xl mx-auto">
+            Découvrez les ateliers, expositions et animations classées par date.
+        </p>
+    </section>
+
+    <section class="max-w-6xl mx-auto py-8 space-y-6">
+        {
+            activities.length > 0 ? (
+                activities.map((activity) =>
+                    activity.id ? (
+                        <div class="bg-gray-800 p-6 rounded-lg text-white text-center">
+                            <h2 class="text-2xl font-semibold">
+                                {activity.titre}
+                            </h2>
+                            <p class="mt-2 text-lg">
+                                {new Date(
+                                    activity.date_activites,
+                                ).toLocaleDateString()}
+                            </p>
+                            <a
+                                href={`/activites/${activity.id}`}
+                                class="text-indigo-400 hover:underline"
+                            >
+                                Voir plus
+                            </a>
+                        </div>
+                    ) : (
+                        <p class="text-red-500">Activité sans ID détectée</p>
+                    ),
+                )
+            ) : (
+                <p class="text-gray-400 text-center">
+                    Aucune activité disponible.
+                </p>
+            )
+        }
+    </section>
+</Layout>

@@ -1,0 +1,32 @@
+---
+export const prerender = false;
+
+import Layout from "../../layouts/Layout.astro";
+import { getActivityById } from "../../../backend/backend.mjs";
+
+const { id } = Astro.params;
+
+console.log("Activité ID:", id); // Debugging
+
+if (!id) {
+    throw new Error("ID d'activité manquant");
+}
+
+let activity;
+try {
+    activity = await getActivityById(id);
+} catch (error) {
+    console.error("Erreur lors de la récupération de l'activité :", error);
+    throw new Error("Activité introuvable");
+}
+---
+
+<Layout title={activity.titre}>
+    <section class="py-16 bg-gray-900 text-white text-center">
+        <h1 class="text-5xl font-bold mb-6">{activity.titre}</h1>
+        <p class="text-lg">
+            Date : {new Date(activity.date_activites).toLocaleDateString()}
+        </p>
+        <p class="mt-4 text-lg">Invité : {activity.invite_nom}</p>
+    </section>
+</Layout>

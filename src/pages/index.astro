@@ -1,11 +1,51 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+import CreditMutuelLogo from "../assets/icons/credit_mutuel_logo.svg";
+import KinepolisLogo from "../assets/icons/kinepolis_logo.svg";
+import BelfortLogo from "../assets/icons/belfort_logo.svg";
 ---
 
 <Layout>
-	<Welcome />
+    <!-- Bandeau d'accueil -->
+    <section class="relative w-full h-screen flex items-center justify-center bg-black text-white text-center">
+        <div class="absolute inset-0 bg-[url('/assets/images/placeholder.jpg')] bg-cover bg-center opacity-40"></div>
+        <div class="relative z-10 space-y-6">
+            <h1 class="text-5xl font-bold">Bienvenue à Ciné Échos</h1>
+            <p class="text-lg">Plongez dans l’univers du cinéma nocturne du <strong>10 au 13 mars</strong> à Belfort</p>
+            <Button text="Réserver ma place" url="#" variant="dark" size="large" />
+        </div>
+    </section>
+
+    <!-- Aperçu des sections principales -->
+    <section class="py-16 bg-gray-900 text-white text-center">
+        <h2 class="text-4xl font-bold mb-10">Découvrez le Festival</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-semibold">Programme des films</h3>
+                <p>Une sélection de films immersifs sur le thème de la nuit.</p>
+                <Button text="Voir les films" url="/films" variant="outlined" />
+            </div>
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-semibold">Nos invités</h3>
+                <p>Rencontrez les réalisateurs et experts du cinéma nocturne.</p>
+                <Button text="Découvrir les invités" url="/invites" variant="outlined" />
+            </div>
+            <div class="p-6 bg-gray-800 rounded-lg">
+                <h3 class="text-xl font-semibold">Infos pratiques</h3>
+                <p>Tout ce qu’il faut savoir pour préparer votre venue.</p>
+                <Button text="En savoir plus" url="/infos-pratiques" variant="outlined" />
+            </div>
+        </div>
+    </section>
+
+    <!-- Partenaires -->
+    <section class="py-16 text-center bg-white">
+        <h2 class="text-4xl font-bold mb-10">Nos partenaires</h2>
+        <div class="flex flex-wrap justify-center gap-10">
+            <CreditMutuelLogo class="h-16" alt="Crédit Mutuel" />
+            <KinepolisLogo class="h-16" alt="Kinépolis" />
+            <BelfortLogo class="h-16" alt="Ville de Belfort" />
+        </div>
+    </section>
 </Layout>

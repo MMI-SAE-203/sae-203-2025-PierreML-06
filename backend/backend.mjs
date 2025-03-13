@@ -29,12 +29,12 @@ export async function getActivityById(id) {
 
 // Récupère les infos d'un invité par ID
 export async function getGuestById(id) {
-    return await pb.collection('invite').getOne(id);
+    return await pb.collection('invite').getOne(id, { expand: 'anime' });
 }
 
 // Récupère toutes les activités d'un animateur donné par son ID
 export async function getActivitiesByGuestId(guestId) {
-    return await pb.collection('activites').getFullList({ filter: `invite_id = "${guestId}"` });
+    return await pb.collection('activites').getFullList({ filter: `invite_id = "${guestId}"`, expand: 'sera_present' });
 }
 
 // Récupère toutes les activités d'un animateur donné par son nom
@@ -51,4 +51,3 @@ export async function upsertItem(collectionName, data, id = null) {
         return await pb.collection(collectionName).create(data);
     }
 }
-

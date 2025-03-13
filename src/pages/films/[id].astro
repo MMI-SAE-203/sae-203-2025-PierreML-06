@@ -1,85 +1,52 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { getFilmById } from "../../../backend/backend.mjs";
 import ImgPb from "../../components/ImgPb.astro";
-import { getFilmById, getAllFilmsSorted } from "../../../backend/backend.mjs";!
+import Button from "../../components/Button.astro";
 
+const { id } = Astro.params;
+let film = null;
 
-// 🚀 Ajout de `getStaticPaths()`
-export async function getStaticPaths() {
-    const films = await getAllFilmsSorted();
-    console.log("Films récupérés pour les routes dynamiques :", films);
-
-    return films.map((film) => ({
-        params: { id: film.id.toString() }, // Convertir en string si nécessaire
-    }));
-}
-
-// Vérification de l'ID récupéré
-const { params } = Astro.props;
-console.log("ID récupéré :", params.id);
-
-if (!params || !params.id) {
-    throw new Error("Aucun ID fourni pour récupérer le film.");
-}
-
-const film = await getFilmById(params.id);
-console.log("Film récupéré :", film);
-
-if (!film) {
-    throw new Error(`Aucun film trouvé avec l'ID ${params.id}`);
+try {
+    film = await getFilmById(id);
+} catch (error) {
+    console.error("Erreur lors du chargement du film :", error);
 }
 ---
-<Layout title={film ? film.titre : "Chargement..."}>
-    {film ? (
-        <section class="pt-32 pb-16 bg-black text-white text-center">
-            <h1 class="text-5xl font-bold mb-6">{film.titre}</h1>
-            <div class="max-w-4xl mx-auto">
-                <!-- Affiche du film -->
-                <ImgPb
-                    record={film}
-                    field="affiche"
-                    alt={film.titre}
-                    classPicture="w-full max-w-lg mx-auto rounded-lg shadow-lg"
-                />
 
-                <!-- Synopsis -->
-                <p class="text-lg mt-6">{film.synopsis}</p>
+<Layout title={film ? film.titre : "Film inconnu"}>
+    <section class="pt-32 pb-16 bg-black text-white text-center">
+        <h1 class="text-5xl font-bold mb-6">{film?.titre ?? "Film non trouvé"}</h1>
+        <p class="text-lg max-w-4xl mx-auto">{film?.synopsis ?? "Aucune description disponible."}</p>
+    </section>
 
-                <!-- Bande-annonce -->
-                {film.bande_annonce && (
-                    <div class="mt-6">
-                        <iframe
-                            class="w-full max-w-lg mx-auto rounded-lg"
-                            width="560"
-                            height="315"
-                            src={film.bande_annonce}
-                            title="Bande-annonce"
-                            frameborder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                        />
-                    </div>
-                )}
-
-                <!-- Infos techniques -->
-                <div class="mt-8 text-lg bg-gray-900 p-6 rounded-lg">
-                    <p><strong>Durée :</strong> {film.duree} minutes</p>
-                    <p><strong>Langue :</strong> {film.langue}</p>
-                    <p><strong>Production :</strong> {film.production}</p>
-                </div>
-
-                <!-- Invité associé -->
-                {film.invite && (
-                    <div class="mt-8 bg-gray-800 p-6 rounded-lg">
-                        <h3 class="text-2xl font-semibold">Invité associé</h3>
-                        <p class="mt-2 text-lg">{film.invite.nom}</p>
-                    </div>
-                )}
+    <section class="py-16 bg-gray-900 text-white max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <ImgPb record={film} field="affiche" alt={film?.titre} classPicture="rounded-lg shadow-lg" />
+            <div class="space-y-4">
+                <h2 class="text-3xl font-semibold">Infos Techniques</h2>
+                <p><strong>Durée :</strong> {film?.duree ?? "Inconnue"} min</p>
+                <p><strong>Langue :</strong> {film?.langue ?? "Non spécifiée"}</p>
+                <p><strong>Production :</strong> {film?.production ?? "Non spécifiée"}</p>
             </div>
-        </section>
-    ) : (
-        <section class="pt-32 pb-16 text-white text-center">
-            <p>Chargement du film...</p>
+        </div>
+    </section>
+
+    {film?.bande_annonce && (
+        <section class="py-16 bg-black text-white text-center">
+            <h2 class="text-3xl font-semibold mb-6">Bande-annonce</h2>
+            <iframe class="w-full max-w-4xl h-96 mx-auto rounded-lg shadow-lg" src={film.bande_annonce} allowfullscreen></iframe>
         </section>
     )}
+
+    {film?.invite && (
+        <section class="py-16 bg-gray-800 text-white text-center">
+            <h2 class="text-3xl font-semibold mb-6">Invité associé</h2>
+            <p class="text-lg">{film.invite}</p>
+        </section>
+    )}
+
+    <div class="text-center py-8">
+        <Button url="/films" text="Retour aux films" variant="dark" size="medium" />
+    </div>
 </Layout>

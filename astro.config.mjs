@@ -9,5 +9,6 @@ export default defineConfig({
     integrations: [tailwind(), alpinejs()],
     experimental: {
         svg: true
-    }
+    },
+    output: 'server'
 });

@@ -1,46 +1,73 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getGuestById, getActivitiesByGuestId } from "../../../backend/backend.mjs";
+import ImgPb from "../../components/ImgPb.astro";
+import {
+    getGuestById,
+    getActivitiesByGuestId,
+} from "../../../backend/backend.mjs";
 
 const { id } = Astro.params;
 const guest = await getGuestById(id);
-const activities = await getActivitiesByGuestId(id);
+const activities = guest.expand?.anime;
+console.log(guest.expand?.anime);
 ---
 
 <Layout title={guest.nom}>
     <section class="pt-32 pb-16 bg-black text-white text-center">
         <h1 class="text-5xl font-bold mb-6">{guest.nom}</h1>
-        <p class="text-lg max-w-4xl mx-auto">{guest.role}</p>
+        <p class="text-lg text-gray-400">{guest.role}</p>
     </section>
 
-    <section class="py-16 bg-gray-900 text-white">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-6">
-            <img
-                src={guest.photo}
-                alt={`Photo de ${guest.nom}`}
-                class="w-full h-auto rounded-lg shadow-md"
-            />
-            <div>
-                <h2 class="text-3xl font-bold mb-4">Biographie</h2>
-                <p class="text-lg">{guest.biographie}</p>
+    <section
+        class="py-16 bg-gray-900 text-white max-w-6xl mx-auto px-6 md:px-12 lg:px-20"
+    >
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Photo de l'invité -->
+            <div class="col-span-1 flex justify-center">
+                <ImgPb
+                    record={guest}
+                    field="photo"
+                    alt={guest.nom}
+                    classPicture="duotone col-start-1 row-start-1 col-span-2 row-span-2"
+                    classImg="rounded-lg shadow-lg"
+                />
+            </div>
+
+            <!-- Biographie -->
+            <div class="col-span-2 space-y-6">
+                <h2 class="text-3xl font-semibold">Biographie</h2>
+                <p class="text-lg text-gray-300">{guest.biographie}</p>
             </div>
         </div>
     </section>
 
-    <section class="py-16 bg-gray-800 text-white">
+    <!-- Activités associées -->
+    <section class="py-16 bg-gray-800 text-white text-center">
         <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">Films et Activités</h2>
+            <h2 class="text-4xl font-bold mb-6">
+                Activités durant le festival
+            </h2>
             {
                 activities.length > 0 ? (
-                    <ul class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {activities.map((activity) => (
-                            <li class="bg-gray-700 p-4 rounded-lg">
-                                {activity.nom}
-                            </li>
+                            <a
+                                href={`/activites/${activity.id}`}
+                                class="block bg-gray-700 p-6 rounded-lg hover:bg-gray-600 transition"
+                            >
+                                <h3 class="text-2xl font-semibold">
+                                    {activity.titre}
+                                </h3>
+                                <p class="text-sm text-gray-400">
+                                    {activity.lieu}
+                                </p>
+                            </a>
                         ))}
-                    </ul>
+                    </div>
                 ) : (
-                    <p class="text-gray-400">Aucune activité associée.</p>
+                    <p class="text-lg text-gray-400">
+                        Aucune activité répertoriée.
+                    </p>
                 )
             }
         </div>

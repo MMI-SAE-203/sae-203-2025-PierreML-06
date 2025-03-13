@@ -5,6 +5,25 @@ import CreditMutuelLogo from "../assets/icons/credit_mutuel_logo.webp";
 import KinepolisLogo from "../assets/icons/kinepolise_logo.webp";
 import BelfortLogo from "../assets/icons/belfort_logo.webp";
 import { Picture } from "astro:assets";
+import Carousel from "../components/carousel.astro";
+
+// ✅ Correction : utiliser .src pour ne récupérer que le chemin de l'image
+import ExterieurNuit from "../assets/images/exterieur_nuit.jpg";
+import LaLaLand from "../assets/images/la_la_land.jpg";
+import LesVoleurs from "../assets/images/les_voleurs.jpg";
+import Nocturnal from "../assets/images/nocturnal.jpg";
+import NuitNoire from "../assets/images/nuit_noire.jpg";
+import TheLighthouse from "../assets/images/the_lighthouse.jpg";
+
+// ✅ On s'assure que le tableau contient bien des strings (les URLs)
+const images = [
+    ExterieurNuit,
+    LaLaLand,
+    LesVoleurs,
+    Nocturnal,
+    NuitNoire,
+    TheLighthouse,
+];
 ---
 
 <Layout>
@@ -13,7 +32,7 @@ import { Picture } from "astro:assets";
         class="relative w-full h-screen flex items-center justify-center bg-black text-white text-center"
     >
         <div
-            class="absolute inset-0 bg-[url('/assets/images/placeholder.jpg')] bg-cover bg-center opacity-40"
+            class="absolute inset-0 bg-[url('../assets/images/placeholder.webp')] bg-cover bg-center opacity-40"
         >
         </div>
         <div class="relative z-10 space-y-6">
@@ -62,6 +81,14 @@ import { Picture } from "astro:assets";
                 />
             </div>
         </div>
+    </section>
+
+    <!-- Carrousel -->
+    <section class="py-16 bg-gray-800 text-white text-center">
+        <h2 class="text-4xl font-bold mb-10">
+            Plongez dans l'univers du cinéma
+        </h2>
+        <Carousel images={images} />
     </section>
 
     <!-- Partenaires -->

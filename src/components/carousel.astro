@@ -1,0 +1,51 @@
+---
+const { images } = Astro.props;
+console.log(images); // Debug pour voir si les images sont bien reçues
+
+import ImgPb from "./ImgPb.astro";
+---
+
+<div x-data="{ currentIndex: 0 }" class="relative w-full max-w-4xl mx-auto">
+  <!-- Slides -->
+  <div class="overflow-hidden relative">
+    <div
+      class="flex transition-transform duration-500"
+      :style="'transform: translateX(-' + (currentIndex * 100) + '%)'"
+    >
+      <template x-for="(image, index) in images" :key="index">
+        <ImgPb
+          field="images"
+          alt="test"
+          classPicture="duotone col-start-1 row-start-1 col-span-2 row-span-2 group-hover:before:bg-black"
+          classImg="group-hover:grayscale-0 group-hover:mix-blend-normal"
+        />
+      </template>
+    </div>
+  </div>
+
+  <!-- Boutons -->
+  <button
+    class="absolute top-1/2 left-2 transform -translate-y-1/2 px-4 py-2 bg-gray-700 text-white rounded"
+    @click="currentIndex = currentIndex > 0 ? currentIndex - 1 : images.length - 1"
+  >
+    ←
+  </button>
+  <button
+    class="absolute top-1/2 right-2 transform -translate-y-1/2 px-4 py-2 bg-gray-700 text-white rounded"
+    @click="currentIndex = currentIndex < images.length - 1 ? currentIndex + 1 : 0"
+  >
+    →
+  </button>
+
+  <!-- Indicateurs -->
+  <div
+    class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2"
+  >
+    <template x-for="(image, index) in images" :key="index">
+      <button
+        class="w-3 h-3 rounded-full"
+        :class="currentIndex === index ? 'bg-white' : 'bg-gray-400'"
+        @click="currentIndex = index"></button>
+    </template>
+  </div>
+</div>

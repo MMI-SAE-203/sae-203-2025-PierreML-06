@@ -4,7 +4,12 @@ export const pb = new PocketBase('http://127.0.0.1:8090');
 
 // Récupère tous les films triés par date de projection
 export async function getAllFilmsSorted() {
-    return await pb.collection('film').getFullList({ sort: 'annee_de_sortie' });
+    let films = await pb.collection('film').getFullList({ sort: 'annee_de_sortie' });
+    films = films.map((film) => {
+        film.imgUrl = pb.files.getURL(film, film.affiche);
+        return film;
+    });
+    return films
 }
 
 // Récupère toutes les activités triées par date

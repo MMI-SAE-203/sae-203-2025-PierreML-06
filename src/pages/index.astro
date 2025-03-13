@@ -7,23 +7,6 @@ import BelfortLogo from "../assets/icons/belfort_logo.webp";
 import { Picture } from "astro:assets";
 import Carousel from "../components/carousel.astro";
 
-// ✅ Correction : utiliser .src pour ne récupérer que le chemin de l'image
-import ExterieurNuit from "../assets/images/exterieur_nuit.jpg";
-import LaLaLand from "../assets/images/la_la_land.jpg";
-import LesVoleurs from "../assets/images/les_voleurs.jpg";
-import Nocturnal from "../assets/images/nocturnal.jpg";
-import NuitNoire from "../assets/images/nuit_noire.jpg";
-import TheLighthouse from "../assets/images/the_lighthouse.jpg";
-
-// ✅ On s'assure que le tableau contient bien des strings (les URLs)
-const images = [
-    ExterieurNuit,
-    LaLaLand,
-    LesVoleurs,
-    Nocturnal,
-    NuitNoire,
-    TheLighthouse,
-];
 ---
 
 <Layout>
@@ -88,7 +71,7 @@ const images = [
         <h2 class="text-4xl font-bold mb-10">
             Plongez dans l'univers du cinéma
         </h2>
-        <Carousel images={images} />
+        <Carousel /> 
     </section>
 
     <!-- Partenaires -->

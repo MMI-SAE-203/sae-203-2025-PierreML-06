@@ -1,5 +1,4 @@
 ---
-import { Picture } from "astro:assets";
 import { pb } from "../../backend/backend.mjs";
 const {
     record,
@@ -17,13 +16,12 @@ const imageUrl = record?.[field]
 
 {
     imageUrl && (
-        <Picture
-            pictureAttributes={{ class: classPicture }}
-            class={classImg}
-            inferSize={true}
-            formats={["avif", "webp"]}
-            alt={alt || "Image"}
-            src={imageUrl}
-        />
+        <picture class={ classPicture }>
+            <img
+                class={classImg}
+                alt={alt || "Image"}
+                src={imageUrl}
+            />
+        </picture>
     )
 }

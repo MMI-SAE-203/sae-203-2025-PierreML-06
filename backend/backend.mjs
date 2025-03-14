@@ -1,6 +1,6 @@
 import PocketBase from 'pocketbase';
 
-export const pb = new PocketBase('http://127.0.0.1:8090');
+export const pb = new PocketBase('https://sae-203.mouilleseaux-lhuillier-pierre.fr:443');
 
 // Récupère tous les films triés par date de projection
 export async function getAllFilmsSorted() {
